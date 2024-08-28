@@ -1,13 +1,45 @@
-const menuOptions = [
+const list = document.querySelector('ul')
+const buttonShowAll = document.querySelector('.show-all')
+const buttonMapAll = document.querySelector('.map-all')
 
-    { name: 'X-Salada', price: 30, vegan: false, src: './img/xsalada.jpeg' },
-    
-    { name: 'X-Bacon', price: 34, vegan: false, src: './img/xbacon.png' },
-    
-    { name: 'X-Bacon Egg', price: 39, vegan: false, src: './img/bacon-egg.png' },
-    
-    { name: 'Monstruoso', price: 50, vegan: false, src: './img/monstruoso.png' },
-    
-    { name: 'Big Vegano', price: 55, vegan: true, src: './img/xvegan.png' },
 
-]
+function showAll(productArray){
+   let myli = ''
+
+    productArray.forEach((product) => {
+        myli +=  `
+    
+    <li>
+                <img src=${product.src}>
+                <p>${product.name}</p>
+                <p class="item-price">R$ ${product.price}</p>
+            </li>
+    `
+    
+    })
+
+    list.innerHTML = myli
+
+    
+}
+
+function mapAllItems(params) {
+    
+    const newPrices = menuOptions.map((product) =>({ // product é a variavel que vai guardar as informações da variavel menuOption
+      ...product, // Spread Operator
+      price: product.price * 0.9,
+      
+    
+    }))
+
+
+    showAll(newPrices)
+    console.log(newPrices)
+}
+
+buttonShowAll.addEventListener('click', () => showAll(menuOptions))
+buttonMapAll.addEventListener('click', mapAllItems )
+
+
+
+
